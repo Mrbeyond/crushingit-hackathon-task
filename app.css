@@ -56,9 +56,6 @@ button{
 .mb-half-rem{
  margin-bottom: 0.5rem;
 }
-.mb-1-rem{
-  margin-bottom: 1rem;
-}
  
 .navbar{
   position: fixed;
@@ -71,6 +68,7 @@ button{
   left: 0;
   right: 0;
   align-items: center;
+  z-index: 1;
 }
 
 .shopify-icon-desktop{
@@ -143,7 +141,6 @@ button{
   border: 1px solid var(--stroke-100);
 }
 
-
 .search-input:focus{
   border: 2px solid var(--white);
 }
@@ -161,6 +158,7 @@ button{
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding-top: 88px;
 }
 
 .info-container{
@@ -168,8 +166,12 @@ button{
   display: flex;
   justify-content: space-between;
   padding: 12px 8px 12px 16px;
-  margin-top: 88px;
   gap: 8px;
+  margin-bottom: 18px;
+}
+
+.info-container[aria-hidden="true"]{
+  display: none;
 }
 
 .info-content{
@@ -209,7 +211,6 @@ button{
   background: var(--white);
   padding: 8px;
   border: 1px solid var(--stroke-50);
-  margin-top: 18px;
   color: var(--font-dark);
 }
 
@@ -223,6 +224,31 @@ button{
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
+}
+
+.progress-indicator{
+  display:  flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+progress{
+  width: 72px;
+  height: 4px;
+  border-radius: 28px;
+}
+
+/* Style the progress bar */
+progress::-webkit-progress-bar {
+  background-color: var(--font-light);
+  border-radius: 28px;
+}
+
+/* Style the progress value */
+progress::-webkit-progress-value {
+  background-color: var(--grey-300);
+  border-radius: 5px;
 }
 
 #stepsContainer{
@@ -586,7 +612,7 @@ input[type="checkbox"]:checked +label::before{
 
 .name-and-email-menu-item span:nth-child(1){
   font-size: 13px ;
-  font-weight: 600 !important;
+  font-weight: 500;
   line-height: 18px;
   letter-spacing: 0em;  
 }
@@ -719,6 +745,5 @@ input[type="checkbox"]:checked +label::before{
 
   .default-alert-text{
     min-height: 50px;
-  }
-  
+  }  
 }

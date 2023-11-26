@@ -6,7 +6,12 @@ const notificationToggler = document.getElementById("notificationToggler");
 const menuToggler = document.getElementById("menuToggler");
 const notificationDialog = document.getElementById("notificationDialog");
 const menuDialog = document.getElementById("menuDialog");
+const progressBar = document.getElementById("progress-bar");
+const progressLabel = document.getElementById("progress-label");
+const updatesContainer = document.getElementById("updatesContainer");
+const updatesContainerCloser = document.getElementById("updatesContainerCloser");
 
+//Notification icon button click event listener
 notificationToggler.addEventListener("click", (event)=>{ 
   const expanded = notificationToggler.getAttribute('aria-expanded') === 'true';  
   if (expanded) {
@@ -22,6 +27,7 @@ notificationToggler.addEventListener("click", (event)=>{
     menuDialog.setAttribute('aria-hidden', 'true');
 })
 
+// Menu icon click event listener
 menuToggler.addEventListener("click", (event)=>{ 
   const expanded = menuToggler.getAttribute('aria-expanded') === 'true';  
   if (expanded) {
@@ -33,8 +39,13 @@ menuToggler.addEventListener("click", (event)=>{
   }
 
   //Close Notification Dialog
-    notificationToggler.setAttribute('aria-expanded', 'false');
-    notificationDialog.setAttribute('aria-hidden', 'true');
+  notificationToggler.setAttribute('aria-expanded', 'false');
+  notificationDialog.setAttribute('aria-hidden', 'true');
+})
+
+updatesContainerCloser.addEventListener("click", (event)=>{
+  updatesContainer.setAttribute("aria-hidden", "true")
+  updatesContainerCloser.setAttribute("aria-expanded", "false");
 })
 
 
@@ -86,6 +97,15 @@ const sectionExpander=(stepSection)=>{
 }
 
 /**
+ * Computes progress bar indicator based on completed steps
+ */
+const progressIndicator=()=>{
+  const checkedStepsCounter = stepsContainer.querySelectorAll('input[type="checkbox"]:checked')?.length
+  progressBar.value = checkedStepsCounter*20;
+  progressLabel.innerHTML = checkedStepsCounter;
+}
+
+/**
  * expandNextStep checks next unmarked step and expand it
  * @param {HTMLDivElement} curentStep 
  */
@@ -103,6 +123,9 @@ const expandNextStep=(curentStep)=>{
   if(nextUncheckedStep){
     sectionExpander(nextUncheckedStep)
   }
+
+  // Update steps progress
+  progressIndicator()
 }
 
 /**
@@ -126,6 +149,8 @@ stepsContainer.addEventListener("click", (event)=>{
     if(event.target.checked === true){
       return expandNextStep(stepSection);
     }else{
+      // Update steps progress
+      progressIndicator()
       return; // To enable unchecking without expand, in case stopPropagation fails
     }
   } else if(event.target?.nodeName === "LABEL"){
