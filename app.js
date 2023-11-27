@@ -49,6 +49,19 @@ updatesContainerCloser.addEventListener("click", (event)=>{
 })
 
 
+// Close any dialog
+document.body.addEventListener("keydown", (event)=>{
+  console.log(event.key);
+  if (event.key === "Escape") {    
+    //Close Notification Dialog
+    notificationToggler.setAttribute('aria-expanded', 'false');
+    notificationDialog.setAttribute('aria-hidden', 'true');
+
+    // Close Menu Dialog
+    menuToggler.setAttribute('aria-expanded', 'false');
+    menuDialog.setAttribute('aria-hidden', 'true');
+  }
+})
 
 
 /**
